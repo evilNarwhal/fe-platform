@@ -1,11 +1,13 @@
 ﻿import dotenv from "dotenv";
 
 /**
- * 浣跨敤 dotenv 鍏煎浣庣増鏈?Node 鐜銆? */
+ * 使用 dotenv 兼容低版本 Node 环境。
+ */
 dotenv.config();
 
 /**
- * 缁熶竴璇诲彇杩愯鏃剁幆澧冨彉閲忋€? */
+ * 统一读取运行时环境变量。
+ */
 export const env = {
   port: Number(process.env.PORT ?? 4000),
   supabaseUrl: process.env.SUPABASE_URL ?? "",
@@ -19,7 +21,9 @@ interface AssertEnvOptions {
 }
 
 /**
- * 鍚姩鏃舵牎楠屽叧閿厤缃€? * - mock 妯″紡涓嬪彲璺宠繃 Supabase 寮烘牎楠屻€? */
+ * 启动时校验关键配置。
+ * - mock 模式下可跳过 Supabase 强校验。
+ */
 export const assertEnv = (options: AssertEnvOptions = {}): void => {
   const { requireSupabase = true } = options;
   if (!requireSupabase) return;
