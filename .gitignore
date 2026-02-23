@@ -1,0 +1,9 @@
+node_modules
+# Environment files
+.env
+.env.*
+!.env.example
+!.env*.example
+
+# Explicit server env file
+apps/monitor-server/.env

@@ -1,0 +1,19 @@
+{
+  "name": "fe-platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:dashboard": "pnpm -C apps/monitor-dashboard dev",
+    "dev:server": "pnpm -C apps/monitor-server dev",
+    "build": "pnpm -r build --if-present",
+    "build:dashboard": "pnpm -C apps/monitor-dashboard build",
+    "preview:dashboard": "pnpm -C apps/monitor-dashboard preview",
+    "lint": "pnpm -r lint --if-present",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.26.2"
+}

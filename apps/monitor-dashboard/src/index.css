@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+}
+
+/* Global root tokens and text rendering */
+:root {
+  color-scheme: light;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Unified box model to keep layout calculations stable */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Page baseline colors */
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Global scrollbar style for both light and dark themes */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.4) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  background-color: hsl(var(--muted-foreground) / 0.28);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.48);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Keep React root full-height */
+#root {
+  min-height: 100vh;
+}
+
+/* Numeric KPI font helper */
+.font-space {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+
+/* Shared glass style */
+.custom-glass {
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* Single-line truncation utility */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --chart-1: 239 84% 67%;
+    --chart-2: 173 80% 40%;
+    --chart-3: 199 89% 55%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 347 89% 60%;
+    --pie-1: 221 83% 53%;
+    --pie-2: 142 71% 45%;
+    --pie-3: 24 95% 53%;
+    --pie-4: 188 95% 43%;
+    --pie-5: 271 91% 65%;
+    --pie-6: 45 93% 47%;
+    --pie-7: 0 84% 60%;
+    --pie-8: 173 80% 40%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 220 12% 7%;
+    --foreground: 220 10% 88%;
+    --card: 220 10% 10%;
+    --card-foreground: 220 9% 86%;
+    --popover: 220 10% 11%;
+    --popover-foreground: 220 9% 86%;
+    --primary: 220 8% 78%;
+    --primary-foreground: 220 12% 12%;
+    --secondary: 220 8% 15%;
+    --secondary-foreground: 220 10% 84%;
+    --muted: 220 8% 14%;
+    --muted-foreground: 220 6% 62%;
+    --accent: 220 8% 17%;
+    --accent-foreground: 220 10% 86%;
+    --destructive: 0 70% 40%;
+    --destructive-foreground: 210 20% 96%;
+    --border: 220 8% 24%;
+    --input: 220 8% 18%;
+    --ring: 220 8% 72%;
+    --chart-1: 239 80% 72%;
+    --chart-2: 173 72% 48%;
+    --chart-3: 199 80% 62%;
+    --chart-4: 38 85% 60%;
+    --chart-5: 347 82% 66%;
+    --pie-1: 213 94% 68%;
+    --pie-2: 142 71% 61%;
+    --pie-3: 28 96% 61%;
+    --pie-4: 187 85% 53%;
+    --pie-5: 270 95% 75%;
+    --pie-6: 48 96% 53%;
+    --pie-7: 0 91% 71%;
+    --pie-8: 171 77% 50%;
+  }
+}
+
+.dark body {
+  background:
+    radial-gradient(1100px 540px at 70% 85%, rgba(148, 163, 184, 0.07), transparent 60%),
+    radial-gradient(900px 460px at 20% -10%, rgba(100, 116, 139, 0.06), transparent 55%),
+    linear-gradient(180deg, #0a0c11 0%, #0d1015 100%);
+}
