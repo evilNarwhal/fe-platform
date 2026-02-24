@@ -5,6 +5,12 @@
  */
 dotenv.config();
 
+const parseCsv = (value: string | undefined): string[] =>
+  (value ?? "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
 /**
  * 统一读取运行时环境变量。
  */
@@ -14,6 +20,22 @@ export const env = {
   supabaseServiceKey:
     process.env.SUPABASE_SERVICE_KEY ?? process.env.SURVICE_KEY ?? "",
   dashboardUseMock: process.env.DASHBOARD_USE_MOCK === "true",
+  collectCorsAllowedOrigins: parseCsv(
+    process.env.CORS_COLLECT_ALLOWED_ORIGINS ??
+      process.env.CORS_ALLOWED_ORIGINS ??
+      process.env.CORS_ORIGIN
+  ),
+  dashboardCorsAllowedOrigins: parseCsv(
+    process.env.CORS_DASHBOARD_ALLOWED_ORIGINS ??
+      process.env.CORS_ALLOWED_ORIGINS ??
+      process.env.CORS_ORIGIN
+  ),
+  collectCorsAllowCredentials:
+    (process.env.CORS_COLLECT_ALLOW_CREDENTIALS ??
+      process.env.CORS_ALLOW_CREDENTIALS) === "true",
+  dashboardCorsAllowCredentials:
+    (process.env.CORS_DASHBOARD_ALLOW_CREDENTIALS ??
+      process.env.CORS_ALLOW_CREDENTIALS) === "true",
 };
 
 interface AssertEnvOptions {

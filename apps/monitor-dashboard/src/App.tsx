@@ -1,39 +1,15 @@
-﻿import React, { useEffect, useState } from "react";
-import { BookText, LayoutDashboard, Moon, PanelLeft, Sun } from "lucide-react";
+﻿import React, { Suspense, lazy, useState } from "react";
+import { BookText, LayoutDashboard, PanelLeft } from "lucide-react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useI18n, type Locale } from "@/i18n";
 import AppSidebar from "@/components/layout/AppSidebar";
+import ThemeToggleButton from "@/components/ThemeToggleButton";
 import DashboardPage from "@/pages/DashboardPage";
-import SDKDocsPage from "@/pages/SDKDocsPage";
 
-interface ThemeToggleButtonProps {
-  ariaLabel: string;
-}
-
-const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({ ariaLabel }) => {
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof document === "undefined") return true;
-    return document.documentElement.classList.contains("dark");
-  });
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    document.documentElement.classList.toggle("dark", isDark);
-  }, [isDark]);
-
-  return (
-    <button
-      type="button"
-      onClick={() => setIsDark((prev) => !prev)}
-      aria-label={ariaLabel}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-muted/40 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground dark:border-[#3a404a] dark:bg-[#151921]/90"
-    >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-    </button>
-  );
-};
+// 懒加载
+const SDKDocsPage = lazy(() => import("@/pages/SDKDocsPage"));
 
 const App: React.FC = () => {
   const { t, locale, setLocale } = useI18n();
@@ -108,7 +84,14 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage appId={appId} />} />
-            <Route path="/sdk-docs" element={<SDKDocsPage />} />
+            <Route
+              path="/sdk-docs"
+              element={
+                <Suspense fallback={<div className="text-sm text-muted-foreground">加载SDK文档中....</div>}>
+                  <SDKDocsPage />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </div>
